@@ -27,7 +27,16 @@ app.post('/form',async (req,res)=>{
     });
 })
 
-app.listen(5000,(req,res)=>{
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'client/public')));
+    // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
+    });
+  }
+
+app.listen(process.env.PORT || 5000,(req,res)=>{
     console.log("server is up and running");
     //res.send('I am listening')
 })
