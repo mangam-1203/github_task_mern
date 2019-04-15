@@ -1,0 +1,1 @@
+An API that interacts with Github API and fetch you the user details for a particular github userid.
